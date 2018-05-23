@@ -59,7 +59,7 @@
 
 <script>
 import states from '../services/states/';
-import sHymnal from './services/hymnals/'
+import sHymnal from '../services/hymnals/'
 // import router from '../router';
 
 export default {

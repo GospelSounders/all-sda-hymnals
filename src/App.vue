@@ -110,7 +110,7 @@
   </v-app>
 </template>
 <script>
-// import states from './services/states/';
+import hymnals from './services/hymnals/';
 import files from './services/files/'
 
 export default {
@@ -126,50 +126,48 @@ export default {
   },
   created () {
     let self = this
-    // alert('created')
-    files.checkStatus(function (response) {
-      function loopCheckStatus (response) {
-        if (response === true) {
-          // read file
-          files.openFile(function (err, data) {
-            // alert('read file')
-            if (err) {}
-            // alert(data)
-            data = JSON.parse(data)
-            self.hymnals = data
-            let i
-            let languages = []
-            // alert(253)
-            // try{
-            for (i in self.hymnals) {
-              let hymnal = self.hymnals[i]
-              let lang = hymnal.Language
-              languages[lang] = lang
-            }
-            // }catch(e){
-            //   alert(e)
-            // }
-            // alert(259)
-            let langs = []
-            for (let i in languages) {
-              // alert(i)
-              langs.push({lang: i, isOpen: false})
-            }
-            // alert(265)
-            self.Languages = langs
-            // alert("langes")
-            // alert(langs)
-            alert(self.Languages)
-          }, 'index.json')
-          return true
-        }
-        // wait for deviceReady
-        files.checkStatus(function (response) {
-          setTimeout(function () { loopCheckStatus(response) }, 500)
-        })
-      }
-      loopCheckStatus(response)
+    hymnals.hymnalInst.deviceIsReady(function(ready){
+      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal){
+        self.Languages = langs
+        self.hymnals = hymnals
+      })
+
     })
+    // files.checkStatus(function (response) {
+    //   function loopCheckStatus (response) {
+    //     if (response === true) {
+    //       // read file
+    //       files.openFile(function (err, data) {
+    //         // alert('read file')
+    //         if (err) {}
+    //         // alert(data)
+    //         data = JSON.parse(data)
+    //         self.hymnals = data
+    //         let i
+    //         let languages = []
+    //         // alert(253)
+    //         // try{
+    //         for (i in self.hymnals) {
+    //           let hymnal = self.hymnals[i]
+    //           let lang = hymnal.Language
+    //           languages[lang] = lang
+    //         }
+    //         let langs = []
+    //         for (let i in languages) {
+    //           langs.push({lang: i, isOpen: false})
+    //         }
+    //         self.Languages = langs
+    //         alert(self.Languages)
+    //       }, 'index.json')
+    //       return true
+    //     }
+    //     // wait for deviceReady
+    //     files.checkStatus(function (response) {
+    //       setTimeout(function () { loopCheckStatus(response) }, 500)
+    //     })
+    //   }
+    //   loopCheckStatus(response)
+    // })
     // axios.get('http://jsonplaceholder.typicode.com/users').then(response => this.users = response.data)
   },
   methods: {
