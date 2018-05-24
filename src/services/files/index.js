@@ -3,7 +3,7 @@ function checkStatus(callback) {
 }
 
 function openFile(callback, whichFile) {
-	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/hymnals-data/index.json", 
+	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/hymnals-data/"+whichFile, 
 		function(fileEntry){
 			fileEntry.file(function(file) {
 				var reader = new FileReader();

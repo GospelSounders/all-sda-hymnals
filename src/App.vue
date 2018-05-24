@@ -23,8 +23,8 @@
             <!-- <v-list-tile > -->
               <v-list-tile-title>{{tlang.lang}}</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-for="hymnal of hymnals" :key="hymnal.id" @click.stop="" v-if="hymnal.Language === tlang.lang ">
-              <v-list-tile-title v-if="hymnal.Language === tlang.lang " v-text="hymnal.name"></v-list-tile-title>
+            <v-list-tile v-for="hymnal of hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)" v-if="hymnal.Language === tlang.lang ">
+              <v-list-tile-title v-text="hymnal.name"></v-list-tile-title>
             </v-list-tile>
              <v-divider></v-divider>
           </v-list-group>
@@ -44,25 +44,25 @@
         <icon name="align-justify"></icon>
       </v-toolbar-side-icon>
       <v-spacer></v-spacer>
-      <v-menu transition="slide-x-transition" bottom right>
+      <v-menu transition="slide-x-transition" bottom right v-model="hymnalsShortopen">
         <v-btn  slot="activator" style="color:#fff; font-weight: bold;" >
-          <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;"> </v-subheader>
-          <v-icon>caret-square-o-down</v-icon>
+          <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;">{{currentHymnalName}} </v-subheader>
+          <v-icon>fa-caret-square-o-down</v-icon>
           <!-- <icon name="caret-square-down"></icon> -->
         </v-btn>
-        <v-list>
-          <v-list-tile v-for="hymnal in hymnals" :key="hymnal.id">
+        <v-list >
+          <v-list-tile v-for="hymnal in hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)">
             <v-list-tile-title>{{ hymnal.shortname }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-btn icon @click.native.stop="openGithub()" style="color:green;">
+      <v-btn icon @click.native.stop="prevHymn()" style="color:green;" v-model="canGoBack" :disabled="!canGoBack">
         <v-icon>fa-arrow-circle-left</v-icon>
       </v-btn>
       <v-btn icon @click.native.stop="openGithub()" style="color:purple;">
-        <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;"> </v-subheader>
+        <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;">{{currentHymnNumber}} </v-subheader>
       </v-btn>
-      <v-btn icon @click.native.stop="openGithub()" style="color:green;">
+      <v-btn icon @click.native.stop="nextHymn()" style="color:green;" v-model="canGoNext" :disabled="!canGoNext">
         <v-icon>fa-arrow-circle-right</v-icon>
       </v-btn>
       <v-btn icon>
@@ -77,12 +77,12 @@
     <!-- Footer is in all pages -->
     <v-footer class="DarkCyan pa-3"  app color="#52BE80" style="background-color: Black;">
       <v-flex xs1>
-        <v-btn icon @click.native.stop="openGithub()" style="color:green;">
+        <v-btn icon @click.native.stop="prevHymn()" style="color:green;" :disabled="!canGoBack">
           <v-icon>fa-arrow-circle-left</v-icon>
         </v-btn>
       </v-flex>
       <v-flex xs2 >
-        <v-btn icon @click.native.stop="openGithub()" style="color:green;">
+        <v-btn icon @click.native.stop="nextHymn()" style="color:green;" :disabled="!canGoNext">
           <v-icon>fa-arrow-circle-right</v-icon>
         </v-btn>
       </v-flex>
@@ -102,7 +102,7 @@
         </v-btn>
       </v-flex>
       <v-flex xs2 >
-        <v-btn icon @click.native.stop="openGithub()" style="color:green;">
+        <v-btn icon @click.native.stop="gotoHymnal(10)" style="color:green;">
           <v-icon>help</v-icon>
         </v-btn>
       </v-flex>
@@ -121,56 +121,57 @@ export default {
       drawer: false,
       hymnals: [],
       hymnalsopen: false,
-      Languages: []
+      hymnalsShortopen: false,
+      Languages: [],
+      currentHymnalName: '',
+      currentHymnNumber: '',
+      canGoNext: false,
+      canGoBack: false
+
     }
   },
   created () {
     let self = this
     hymnals.hymnalInst.deviceIsReady(function(ready){
-      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal){
+      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
         self.Languages = langs
         self.hymnals = hymnals
       })
-
     })
-    // files.checkStatus(function (response) {
-    //   function loopCheckStatus (response) {
-    //     if (response === true) {
-    //       // read file
-    //       files.openFile(function (err, data) {
-    //         // alert('read file')
-    //         if (err) {}
-    //         // alert(data)
-    //         data = JSON.parse(data)
-    //         self.hymnals = data
-    //         let i
-    //         let languages = []
-    //         // alert(253)
-    //         // try{
-    //         for (i in self.hymnals) {
-    //           let hymnal = self.hymnals[i]
-    //           let lang = hymnal.Language
-    //           languages[lang] = lang
-    //         }
-    //         let langs = []
-    //         for (let i in languages) {
-    //           langs.push({lang: i, isOpen: false})
-    //         }
-    //         self.Languages = langs
-    //         alert(self.Languages)
-    //       }, 'index.json')
-    //       return true
-    //     }
-    //     // wait for deviceReady
-    //     files.checkStatus(function (response) {
-    //       setTimeout(function () { loopCheckStatus(response) }, 500)
-    //     })
-    //   }
-    //   loopCheckStatus(response)
-    // })
-    // axios.get('http://jsonplaceholder.typicode.com/users').then(response => this.users = response.data)
   },
   methods: {
+    gotoHymnal (hymnalid) {
+      let self = this
+      self.drawer = false
+      self.hymnalsShortopen = false
+      hymnals.hymnalInst.gotoHymnal(hymnalid, function(currentHymnal){
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
+      })
+
+    },
+    nextHymn() {
+      let self = this
+      hymnals.hymnalInst.gotoNumberinCurrentHymnal("next", false, function(currentHymnal){
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
+      })
+
+    },
+    prevHymn() {
+      let self = this
+      hymnals.hymnalInst.gotoNumberinCurrentHymnal("prev", false, function(currentHymnal){
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
+      })
+
+    },
     openGithub () {
       window.open('https://github.com/disjfa/vuetify-sidebar-template')
     }

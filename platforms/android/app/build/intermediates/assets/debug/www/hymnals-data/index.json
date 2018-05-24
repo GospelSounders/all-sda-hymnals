@@ -1,7 +1,7 @@
 {
   "hymnals":[  
   {
-    "id": 1,
+    "id": 0,
     "name": "Hymns and Tunes 1869",
     "longName": "Hymns and Tunes for Those Who Keep the Commandments of God and the Faith of Jesus",
     "shortname": "HT1869",
@@ -10,7 +10,7 @@
     "NumSongs": 10
   },
   {
-    "id": 2,
+    "id": 1,
     "name": "Hymns and Tunes 1886",
     "longName":"The Seventh-day Adventist Hymn and Tune Book (Hymns and Tunes)",
     "shortname": "HT1886",
@@ -19,7 +19,7 @@
     "NumSongs": 10
   },
   {
-    "id": 3,
+    "id": 2,
     "name": "Christ in Song",
     "shortname": "CS",
     "path": "CS",
@@ -27,15 +27,15 @@
     "NumSongs": 10
   },
   {
-    "id": 4,
+    "id": 3,
     "name": "The Church Hymnal",
     "shortname": "CH",
     "path": "CH",
     "Language": "ENGLISH",
-    "NumSongs": 10
+    "NumSongs": 60
   },
   {
-    "id": 6,
+    "id": 4,
     "name": "Seventh-day Adventist Hymnal",
     "shortname": "SDAH",
     "path": "SDAH",
@@ -43,7 +43,7 @@
     "NumSongs": 10
   },
   {
-    "id": 7,
+    "id": 5,
     "name": "Nyimbo za Kristo",
     "shortname": "NZK",
     "path": "NZK",
@@ -51,7 +51,7 @@
     "NumSongs": 10
   },
   {
-    "id": 8,
+    "id": 6,
     "name": "Wende Nyasaye",
     "shortname": "WNY",
     "path": "WNY",
