@@ -59,7 +59,7 @@
       <v-btn icon @click.native.stop="prevHymn()" style="color:green;" v-model="canGoBack" :disabled="!canGoBack">
         <v-icon>fa-arrow-circle-left</v-icon>
       </v-btn>
-      <v-btn icon @click.native.stop="openGithub()" style="color:purple;">
+      <v-btn icon  to="/HymnNumbers" style="color:purple;">
         <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;">{{currentHymnNumber}} </v-subheader>
       </v-btn>
       <v-btn icon @click.native.stop="nextHymn()" style="color:green;" v-model="canGoNext" :disabled="!canGoNext">

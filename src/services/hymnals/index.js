@@ -96,7 +96,7 @@ class hymnals {
 		let path = self.currentHymnal.path
 		files.openFile(function (err, data) {
 			try{
-		    if (err) {return callback()}
+		    if (err) {self.setNavigation(); return callback()}
 		    data = JSON.parse(data)				
 				self.currentHymnal.text = data.songs[self.currentHymnal.hymnNumber] || "Hymn still not available"
 				self.currentHymnal.NumSongs = data.NumSongs
