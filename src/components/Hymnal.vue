@@ -1,6 +1,6 @@
 <template>
-  <v-container grid-list-md text-xs-center style="margin-top: 48px;" >
-    We are going to show humber here: {{hymnNumber}}
+  <v-container grid-list-md text-xs-center style="margin-top: 48px; white-space: pre-line;" >
+    {{hymnText}}
   </v-container>
 </template>
 
@@ -18,12 +18,14 @@ export default {
           row2: [4, 5, 6],
           row3: [7, 8, 9],
         }],
-      hymnNumber: 0
+      hymnNumber: 0,
+      hymnText: ''
     };
   },
   created () {
     let hymnal = hymnals.hymnalInst.getcurrentHymnal()
     this.hymnNumber = hymnal.hymnNumber
+    this.hymnText = hymnals.hymnalInst.arrangeSingleSongWords(hymnal.text)
   },
   methods: {
   },

@@ -131,13 +131,23 @@ export default {
 
     }
   },
+  watch: {
+    $route (to, from){
+      let self = this
+      let currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+      self.currentHymnalName = currentHymnal.shortname
+      self.currentHymnNumber = currentHymnal.hymnNumber
+      self.canGoNext = currentHymnal.canGoNext
+      self.canGoBack = currentHymnal.canGoBack
+    }
+  },
+
   created () {
     let self = this
     hymnals.hymnalInst.deviceIsReady(function(ready){
       hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
         self.Languages = langs
         self.hymnals = hymnals
-
         currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
         self.currentHymnalName = currentHymnal.shortname
         self.currentHymnNumber = currentHymnal.hymnNumber
@@ -145,7 +155,6 @@ export default {
         self.canGoBack = currentHymnal.canGoBack
       })
     })
-    
   },
   methods: {
     gotoHymnal (hymnalid) {

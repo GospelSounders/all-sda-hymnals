@@ -227,6 +227,26 @@ class hymnals {
 		self.typedNumber = parseInt(tmp) || null
 	}
 
+	arrangeSingleSongWords(words) {
+		let wordsArr
+		if(typeof words === 'string') return words
+		try {
+			wordsArr = words
+			let title = wordsArr.title
+			let stanzas = wordsArr.stanzas
+			let choruses = wordsArr.choruses
+			let songOrder = wordsArr.order
+			let tmp, i;
+			tmp = []
+			for (i in stanzas)tmp.push(stanzas[i])
+			stanzas = tmp
+			return stanzas.join('\n\r\n\r')
+		}
+		catch(e){
+			return words
+		}
+	}
+
 }
 
 let hymnalInst = new hymnals()

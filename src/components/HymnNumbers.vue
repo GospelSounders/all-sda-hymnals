@@ -98,6 +98,12 @@ export default {
       this.typedNumber = null
     },
     gotoNumber() {
+      let self = this
+      if(this.typedNumber !== null) {
+        hymnals.hymnalInst.gotoNumberinCurrentHymnal("this", parseInt(this.typedNumber), function(){
+          router.push('/Hymnal');
+        })
+      }
     },
   },
 };
