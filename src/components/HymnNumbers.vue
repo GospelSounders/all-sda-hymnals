@@ -1,8 +1,11 @@
 <template>
   <v-container grid-list-md text-xs-center style="margin-top: 48px;" >
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex v-if="typedNumber===null" xs12>
       Enter Hymn Number
+      </v-flex>
+      <v-flex v-else xs12>
+        {{typedNumber}}
       </v-flex>
       <v-flex v-for="i in numbers[0].row1" :key="`4${i}`" xs4>
         <v-card dark color="primary">
@@ -27,7 +30,7 @@
       </v-flex>
       <v-flex xs4>
         <v-card dark color="primary">
-          <v-btn icon @click.native.stop="typeNumber()" >
+          <v-btn icon @click.native.stop="canceltypeNumber()" >
             <v-icon style="font-size: 2em; font-weight: bold;">cancel</v-icon>
           </v-btn>
         </v-card>
@@ -59,8 +62,8 @@
 
 <script>
 import states from '../services/states/';
-import sHymnal from '../services/hymnals/'
-// import router from '../router';
+import hymnals from '../services/hymnals/'
+import router from '../router/'
 
 export default {
   data() {
@@ -71,14 +74,28 @@ export default {
           row2: [4, 5, 6],
           row3: [7, 8, 9],
         }],
+      typedNumber: null
     };
+  },
+  created () {
+    hymnals.hymnalInst.resettypedNumber()
+    this.typedNumber = null
   },
   methods: {
     typeNumber(whichNumber) {
-      console.log(`typed... ${whichNumber}`);
-      console.log(states.currentHymnal());
+      let self = this
+      hymnals.hymnalInst.typeNumber(whichNumber, function(currentHymnal){
+        self.typedNumber = hymnals.hymnalInst.gettypedNumber()
+        if(currentHymnal.Dialpad === false) router.push('/Hymnal')
+      })
     },
     backspaceNumber() {
+      hymnals.hymnalInst.backspaceTypedNumber()
+      this.typedNumber = hymnals.hymnalInst.gettypedNumber()
+    },
+    canceltypeNumber() {
+      hymnals.hymnalInst.resettypedNumber()
+      this.typedNumber = null
     },
     gotoNumber() {
     },

@@ -70,6 +70,7 @@ class hymnals {
 				break;
 			case "this":
 				hymnNumber = fixedNumber
+				break;
 			default:
 				hymnNumber = self.currentHymnal.hymnNumber
 		}
@@ -152,8 +153,80 @@ class hymnals {
 		}catch(e){}
 	}
 
-	gotoHymn() {
+	typeNumber(typedNumber, callback) { 
+		try{
+		let self = this
+		self.typedNumber = self.typedNumber || 0
+		if(self.typedNumber === 0)self.typedNumber += typedNumber
+		else self.typedNumber = self.typedNumber.toString() + typedNumber.toString()
+
+		self.typedNumber = parseInt(self.typedNumber)
+		// check that number is still smaller than
+		let currentHymnal = self.currentHymnal.id
+		self.currentHymnal.Dialpad = true
+		if(currentHymnal === undefined) {
+			self.gotoHymnal(self.default, function(){
+				// reject last digit if number is greater than Numsongs
+				if(self.typedNumber > self.currentHymnal.NumSongs) {
+					let tmp = []
+					self.typedNumber = self.typedNumber.toString()
+					let i
+					for(i in self.typedNumber)tmp.push(self.typedNumber[i])
+					tmp.pop()
+					tmp = tmp.join('')
+					self.typedNumber = tmp
+
+				}
+				return callback(self.currentHymnal)
+			})
+		} 
+		// reject last digit if number is greater than Numsongs
+		if(self.typedNumber > self.currentHymnal.NumSongs) {
+			let tmp = []
+			self.typedNumber = self.typedNumber.toString()
+			let i
+			for(i in self.typedNumber)tmp.push(self.typedNumber[i])
+			tmp.pop()
+			tmp = tmp.join('')
+			self.typedNumber = tmp
+
+		}
+		self.typedNumber = parseInt(self.typedNumber) || 0 
+		// if number of digits is equal to digits in last hymn, goto hymn
+		let numdigits = self.typedNumber.toString().length
+		let maxnumdigits = self.currentHymnal.NumSongs.toString().length
+		if(numdigits === maxnumdigits) {
+			self.gotoNumberinCurrentHymnal("this", parseInt(self.typedNumber), function(){
+				self.currentHymnal.hymnNumber = self.typedNumber
+				self.currentHymnal.Dialpad = false
+				return callback(self.currentHymnal)
+			})
+		}else callback(self.currentHymnal)		
+		}catch(e){}
 	}
+
+	gettypedNumber() {
+		return this.typedNumber
+	}
+
+	getcurrentHymnal() {
+		return this.currentHymnal
+	}
+
+	resettypedNumber() {
+		this.typedNumber = null;
+	}
+	backspaceTypedNumber() {
+		let self = this
+		let tmp = []
+		self.typedNumber = self.typedNumber.toString()
+		let i
+		for(i in self.typedNumber)tmp.push(self.typedNumber[i])
+		tmp.pop()
+		tmp = tmp.join('')
+		self.typedNumber = parseInt(tmp) || null
+	}
+
 }
 
 let hymnalInst = new hymnals()

@@ -71,7 +71,7 @@
     </v-toolbar>
     <v-content style="padding: 0px 0px 0px 0px;margin-top: 48px;">
       <v-fade-transition mode="out-in">
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
       </v-fade-transition>
     </v-content>
     <!-- Footer is in all pages -->
@@ -87,7 +87,7 @@
         </v-btn>
       </v-flex>
       <v-flex xs2 >
-        <v-btn icon @click.native.stop="openGithub()" style="color:purple;">
+        <v-btn icon style="color:purple;">
           <v-icon>fa-search</v-icon>
         </v-btn>
       </v-flex>
@@ -112,6 +112,7 @@
 <script>
 import hymnals from './services/hymnals/';
 import files from './services/files/'
+import router from './router/'
 
 export default {
   data () {
@@ -136,8 +137,15 @@ export default {
       hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
         self.Languages = langs
         self.hymnals = hymnals
+
+        currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
       })
     })
+    
   },
   methods: {
     gotoHymnal (hymnalid) {
@@ -149,6 +157,12 @@ export default {
         self.currentHymnNumber = currentHymnal.hymnNumber
         self.canGoNext = currentHymnal.canGoNext
         self.canGoBack = currentHymnal.canGoBack
+        if(currentHymnal.Dialpad === false) {
+          router.push('/Hymnal?num='+self.currentHymnNumber)
+        }
+        else {
+          router.push('/HymnNumbers')
+        }
       })
 
     },
@@ -159,6 +173,8 @@ export default {
         self.currentHymnNumber = currentHymnal.hymnNumber
         self.canGoNext = currentHymnal.canGoNext
         self.canGoBack = currentHymnal.canGoBack
+        if(currentHymnal.Dialpad === false) router.push('/Hymnal?num='+self.currentHymnNumber)
+        else router.push('/HymnNumbers')
       })
 
     },
@@ -169,11 +185,10 @@ export default {
         self.currentHymnNumber = currentHymnal.hymnNumber
         self.canGoNext = currentHymnal.canGoNext
         self.canGoBack = currentHymnal.canGoBack
+        if(currentHymnal.Dialpad === false) router.push('/Hymnal?num='+self.currentHymnNumber)
+        else router.push('/HymnNumbers')
       })
 
-    },
-    openGithub () {
-      window.open('https://github.com/disjfa/vuetify-sidebar-template')
     }
   }
 }

@@ -4,6 +4,7 @@ import HomePage from '@/components/HomePage';
 import HymnNumbers from '@/components/HymnNumbers';
 import About from '@/components/About';
 import Settings from '@/components/Settings';
+import Hymnal from '@/components/Hymnal';
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/Settings',
       name: 'Settings',
       component: Settings,
+    },
+    {
+      path: '/Hymnal',
+      name: 'Hymnal',
+      component: Hymnal,
     }
   ],
 });

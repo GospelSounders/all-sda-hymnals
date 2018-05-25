@@ -1,4 +1,4 @@
-#Thu May 24 19:20:56 EAT 2018
+#Fri May 25 10:37:23 EAT 2018
 base.0=/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
 file.0=/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
