@@ -9,7 +9,7 @@ INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/
 INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
 INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
 	package
-		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:102-135
+		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:102-136
 		INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -19,7 +19,7 @@ INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/
 	android:hardwareAccelerated
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:11-45
 	xmlns:android
-		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:136-194
+		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:137-195
 	android:versionCode
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:46-73
 		INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml
@@ -52,7 +52,7 @@ ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:5:18-52
 	android:icon
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:5:53-80
-activity#io.cordova.hellocordova.MainActivity
+activity#io.cordova.allSDAHymnals.MainActivity
 ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:6:9-11:20
 	android:label
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:6:97-134
