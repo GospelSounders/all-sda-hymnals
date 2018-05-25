@@ -17,7 +17,25 @@
         "choruses" :{},
         "order": [],
         "otherHymnals": {
-          "3":57
+          "6":57
+      }
+    },
+    "2" : {
+        "title": "All Creatures of Our God and King",
+        "author": "Francis of Assisi",
+        "key": "Anon",
+        "stanzas": {
+            "1": "All creatures of our God and King,\r\nLift up your voice with us and sing:\r\nAlleluia! Alleluia!\r\nO burning sun with golden beam\r\nAnd silver moon with softer gleam:",
+            "2": "O rushing wind and breezes soft,\r\nO clouds that ride the winds aloft:\r\nOh, praise Him! Alleluia!\r\nO rising morn, in praise rejoice,\r\nO lights of evening, find a voice.",
+            "3": "O flowing waters, pure and clear,\r\nMake music for your Lord to hear.\r\nOh, praise Him! Alleluia!\r\nO fire so masterful and bright,\r\nProviding us with warmth and light,",
+            "4": "Let all things their Creator bless,\r\nAnd worship Him in humbleness,\r\nOh, praise Him! Alleluia!\r\nOh, praise the Father, praise the Son,\r\nAnd praise the Spirit, three in One!"
+        },
+        "choruses" :{
+          "1":"Oh, praise Him! Oh, praise Him!\r\nAlleluia, alleluia, alleluia!"
+        },
+        "order": [],
+        "otherHymnals": {
+          "6":56
       }
     }
   }

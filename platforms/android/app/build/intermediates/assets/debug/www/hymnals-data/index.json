@@ -2,62 +2,89 @@
   "hymnals":[  
   {
     "id": 0,
+    "name": "Millenial Harp",
+    "longName": "Millenial Harp",
+    "shortname": "MH1843",
+    "path": "MH1843",
+    "Language": "ENGLISH",
+    "NumSongs": 123
+  },
+  {
+    "id": 1,
+    "name": "God’s Peculiar People",
+    "longName": "Hymns for God’s Peculiar People",
+    "shortname": "HGPP1849",
+    "path": "HGPP1849",
+    "Language": "ENGLISH",
+    "NumSongs": 53
+  },
+  {
+    "id": 2,
+    "name": "Second Advent Believers",
+    "longName": "Hymns for Second Advent Believers",
+    "shortname": "HSAB1852",
+    "path": "HSAB1852",
+    "Language": "ENGLISH",
+    "NumSongs": 139
+  },
+  {
+    "id": 3,
     "name": "Hymns and Tunes 1869",
     "longName": "Hymns and Tunes for Those Who Keep the Commandments of God and the Faith of Jesus",
     "shortname": "HT1869",
     "path": "HT1869",
     "Language": "ENGLISH",
-    "NumSongs": 10
+    "NumSongs": 537
   },
   {
-    "id": 1,
+    "id": 4,
     "name": "Hymns and Tunes 1886",
     "longName":"The Seventh-day Adventist Hymn and Tune Book (Hymns and Tunes)",
     "shortname": "HT1886",
     "path": "HT1886",
     "Language": "ENGLISH",
-    "NumSongs": 11
+    "NumSongs": 1413
   },
   {
-    "id": 2,
+    "id": 5,
     "name": "Christ in Song",
-    "shortname": "CS",
-    "path": "CS",
+    "shortname": "CS1900",
+    "path": "CS1900",
     "Language": "ENGLISH",
-    "NumSongs": 12
+    "NumSongs": 742
   },
   {
-    "id": 3,
+    "id": 6,
     "name": "The Church Hymnal",
     "shortname": "CH",
     "path": "CH",
     "Language": "ENGLISH",
-    "NumSongs": 60
+    "NumSongs": 703
   },
   {
-    "id": 4,
+    "id": 7,
     "name": "Seventh-day Adventist Hymnal",
     "shortname": "SDAH",
     "path": "SDAH",
     "Language": "ENGLISH",
-    "NumSongs": 697
+    "NumSongs": 920
   },
   {
-    "id": 5,
+    "id": 8,
     "name": "Nyimbo za Kristo",
     "shortname": "NZK",
     "path": "NZK",
     "Language": "KISWAHILI",
-    "NumSongs": 12
+    "NumSongs": 220
   },
   {
-    "id": 6,
+    "id": 9,
     "name": "Wende Nyasaye",
     "shortname": "WNY",
     "path": "WNY",
     "Language": "LUO",
-    "NumSongs": 234
+    "NumSongs": 332
   }
 ],
-"default":4
+"default":7
 }

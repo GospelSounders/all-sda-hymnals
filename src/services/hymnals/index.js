@@ -242,6 +242,14 @@ class hymnals {
 			tmp = []
 			for (i in stanzas)tmp.push(i+'  '+stanzas[i])
 			stanzas = tmp
+			tmp = []
+			if(Object.keys(choruses).length === 1) {	//a single chorus
+				for (i in stanzas) {
+					tmp.push(stanzas[i])
+					tmp.push(choruses[0] || choruses[1])
+				}
+				stanzas = tmp
+			}
 			return {"text":stanzas.join('\n\r\n\r') + '\n\r\n\r',
 				title,
 				author,
