@@ -236,11 +236,19 @@ class hymnals {
 			let stanzas = wordsArr.stanzas
 			let choruses = wordsArr.choruses
 			let songOrder = wordsArr.order
+			let author = wordsArr.author || ''
+			let key = wordsArr.key || ''
 			let tmp, i;
 			tmp = []
-			for (i in stanzas)tmp.push(stanzas[i])
+			for (i in stanzas)tmp.push(i+'  '+stanzas[i])
 			stanzas = tmp
-			return stanzas.join('\n\r\n\r')
+			return {"text":stanzas.join('\n\r\n\r') + '\n\r\n\r',
+				title,
+				author,
+				key
+				}
+
+			//adding choruses
 		}
 		catch(e){
 			return words
