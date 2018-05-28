@@ -21,7 +21,8 @@
     "vue": "^2.5.2",
     "vue-awesome": "^3.0.0",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.17"
+    "vuetify": "^1.0.17",
+    "cordova-browser": "^5.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -81,7 +82,8 @@
   ],
   "cordova": {
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

@@ -1,4 +1,5 @@
 import files from '../files/'
+import axios from 'axios'
 
 class hymnals {
 
@@ -56,6 +57,12 @@ class hymnals {
 	getHymnals(callback) {
 		return callback(this.Languages, this.hymnals, this.default, this.currentHymnal)
 	}
+
+	getHymnals_d(callback) {
+		return callback(this.Languages_d, this.hymnals_d, this.default_d)
+	}
+
+
 
 	gotoNumberinCurrentHymnal(pos, fixedNumber, callback){
 		let self = this;
@@ -261,6 +268,74 @@ class hymnals {
 		catch(e){
 			return words
 		}
+	}
+
+	checkOnlinedb(callback) {
+		let self = this
+		axios
+		  .get('https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/index.json')
+		  .then(function(response){
+		  	let data = response.data
+		  	try{
+		  		data = JSON.parse(data)
+		  	}catch(e){
+		  		data = data
+		  	}
+
+		  	let i
+		  	self.hymnals_d = data.hymnals
+		    self.default_d = data.default
+		  	files.openFile(function (err, datas) {
+				try{
+			    	if (err) {}
+			    	else {
+			    		datas = JSON.parse(datas)	
+			    		for (i in self.hymnals_d) {
+				    		let hymnal = self.hymnals_d[i]
+				    		let id = hymnal.id
+			      			self.hymnals_d[i].isDownloaded = datas.includes(parseInt(id))
+			      		}
+			    	}			
+				}catch(f){
+					// alert(f)
+				}
+				let languages = []
+			    for (i in self.hymnals_d) {
+			      let hymnal = self.hymnals_d[i]
+			      let lang = hymnal.Language
+			      languages[lang] = lang
+			    }
+			    let langs = []
+			    for (let i in languages) {
+			      langs.push({lang: i, isOpen: false})
+			    }
+			    self.Languages_d = langs
+			  	return callback();
+			}, 'downloaded.json')
+		 })
+	}
+
+	updateHymnals(hymnals, callback) {
+		// write to file...
+		let i
+		let self = this
+		let downloadedHymnals = []
+		for(i in hymnals) {
+			let hymnal = hymnals[i]
+			if(hymnal.isDownloaded === true)downloadedHymnals.push(hymnal.id)
+		}
+		alert(downloadedHymnals)
+		files.writeFile(function(){
+			alert("written....")
+			return callback()
+			// update lists with hymnals only which have been downloaded
+			// update default hymnal is need be..
+		},JSON.stringify(downloadedHymnals),'downloaded.json')
+		//then write this to downloaded hymnals
+		// then download all those hymnals..
+		
+
+
 	}
 
 }

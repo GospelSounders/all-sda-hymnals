@@ -29,7 +29,20 @@
              <v-divider></v-divider>
           </v-list-group>
         </v-list-group>
-         <v-divider></v-divider>
+        <v-divider></v-divider>
+        <v-list-tile slot="activator">
+            <v-list-tile-content>
+              <v-list-tile-title>Hymnals</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        <v-divider></v-divider>
+        <v-list-tile to="/ManageDownloads">
+          <v-list-tile-action>
+            <v-icon>fa-gear</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Downloads</v-list-tile-title>
+        </v-list-tile>
+        <v-divider></v-divider>
         <v-list-tile to="/About">
           <v-list-tile-action>
             <!-- <icon name="info"></icon> -->

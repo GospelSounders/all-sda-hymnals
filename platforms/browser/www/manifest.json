@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "All SDA Hymnals",
+  "short_name": "All SDA Hymnals",
+  "version": "io.cordova.allSDAHymnals",
+  "description": "All Seventh-day Adventist Hymnals in history.",
+  "author": "Brian Onang'o",
+  "icons": [],
+  "start_url": "index.html"
+}
