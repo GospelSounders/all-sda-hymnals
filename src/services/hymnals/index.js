@@ -327,6 +327,9 @@ class hymnals {
 		alert(downloadedHymnals)
 		files.writeFile(function(){
 			alert("written....")
+			// download those hymnals...
+			// Update the list....
+			// 
 			return callback()
 			// update lists with hymnals only which have been downloaded
 			// update default hymnal is need be..

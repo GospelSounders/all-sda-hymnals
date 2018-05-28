@@ -6,7 +6,7 @@
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Manage Hymnals</v-list-tile-title>
-              <v-list-tile-sub-title>Download new hymnals and Delete old hymnals you no longer need</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Download new hymnals and delete old hymnals you no longer need. You need to be connected to the internet to see new hymnals</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         
