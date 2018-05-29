@@ -18,12 +18,12 @@
               <v-list-tile-title>Hymnals</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-group v-for="tlang in Languages" sub-group no-action value="false" v-model="tlang.isOpen" :key="tlang.lang">
+          <v-list-group v-for="tlang in Languages" sub-group no-action value="false" v-model="tlang.isOpen" :key="tlang.lang" v-if=" hymnals.some(function(hymnal, index, array){if(hymnal.Language===tlang.lang && hymnal.isDownloaded===true) return true; else return false;}) === true">
             <v-list-tile slot="activator">
             <!-- <v-list-tile > -->
               <v-list-tile-title>{{tlang.lang}}</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-for="hymnal of hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)" v-if="hymnal.Language === tlang.lang ">
+            <v-list-tile v-for="hymnal of hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)" v-if="hymnal.Language === tlang.lang && hymnal.isDownloaded === true">
               <v-list-tile-title v-text="hymnal.name"></v-list-tile-title>
             </v-list-tile>
              <v-divider></v-divider>
@@ -64,7 +64,7 @@
           <!-- <icon name="caret-square-down"></icon> -->
         </v-btn>
         <v-list >
-          <v-list-tile v-for="hymnal in hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)">
+          <v-list-tile v-for="hymnal in hymnals" :key="hymnal.id" @click.native.stop="gotoHymnal(hymnal.id)" v-if="hymnal.isDownloaded===true">
             <v-list-tile-title>{{ hymnal.shortname }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -152,7 +152,31 @@ export default {
       self.currentHymnNumber = currentHymnal.hymnNumber
       self.canGoNext = currentHymnal.canGoNext
       self.canGoBack = currentHymnal.canGoBack
-    }
+    },
+    drawer (val){
+      let self = this
+      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
+        self.Languages = langs
+        self.hymnals = hymnals
+        currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
+      })
+    },
+    hymnalsShortopen (val){
+      let self = this
+      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
+        self.Languages = langs
+        self.hymnals = hymnals
+        currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+        self.currentHymnalName = currentHymnal.shortname
+        self.currentHymnNumber = currentHymnal.hymnNumber
+        self.canGoNext = currentHymnal.canGoNext
+        self.canGoBack = currentHymnal.canGoBack
+      })
+    },
   },
 
   created () {

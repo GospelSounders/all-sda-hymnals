@@ -7,36 +7,80 @@ class hymnals {
 		let self = this
 		self.deviceReady = false;
 		self.currentHymnal = {}
+		let monitor = false
 		files.checkStatus(function (response) {
 			function loopCheckStatus (response) {
 				if (response === true) {
+					monitor = true
 				  // read file
-				 	files.openFile(function (err, data) {
-					    if (err) {}
-					    data = JSON.parse(data)
-						let tmp = data
-					    self.hymnals = data.hymnals
-					    self.default = data.default
-					    let i
-					    let languages = []
-					    for (i in self.hymnals) {
-					      let hymnal = self.hymnals[i]
-					      let lang = hymnal.Language
-					      languages[lang] = lang
-					    }
-					    let langs = []
-					    for (let i in languages) {
-					      langs.push({lang: i, isOpen: false})
-					    }
-					    self.Languages = langs
-						self.deviceReady = true;
+				 // 	files.openFile(function (err, data) {
+					//     if (err) {}
+					//     data = JSON.parse(data)
+					// 	let tmp = data
+					//     self.hymnals = data.hymnals
+					//     self.default = data.default
+					//     let i
+					//     let languages = []
+					//     for (i in self.hymnals) {
+					//       let hymnal = self.hymnals[i]
+					//       let lang = hymnal.Language
+					//       languages[lang] = lang
+					//     }
+					//     let langs = []
+					//     for (let i in languages) {
+					//       langs.push({lang: i, isOpen: false})
+					//     }
+					//     self.Languages = langs
+					// 	self.deviceReady = true;
+
+
 						
-					}, 'index.json')
-					return true
+					// }, 'index.json')
+
+					self.checkHymnalsDb(function(){
+						self.Languages = self.Languages_d
+						// alert(self.Languages)
+						self.hymnals = self.hymnals_d
+						self.default = self.default_d
+						self.deviceReady = true;
+						// alert("done....?")
+						return true
+					})
+					// self.checkOnlinedb(function(err){
+					// 	alert("checked online...")
+					// 	if(err){
+					// 		alert('failed to find online, checking offline')
+					// 		try{
+					// 		self.checklocalDb(function(){
+					// 			self.Languages = self.Languages_d
+					// 			self.self.hymnals = self.self.hymnals_d
+					// 			self.self.default = self.self.default_d
+					// 			self.deviceReady = true;
+					// 			monitor = true
+					// 			return true
+					// 		})
+					// 		}catch(e){alert(e)}
+					// 	}else {
+					// 		try{
+					// 		self.Languages = self.Languages_d
+					// 		self.self.hymnals = self.self.hymnals_d
+					// 		self.self.default = self.self.default_d
+					// 		self.deviceReady = true;
+					// 		monitor = true
+					// 		return true
+					// 		}catch(e){alert(e)}
+					// 	}
+					// })
+					
 				}				
 				// wait for deviceReady
+				if(monitor === true){
+					return true;
+				}
 				files.checkStatus(function (response) {
-				  setTimeout(function () { loopCheckStatus(response) }, 100)
+					// if(monitor === false){
+				  		setTimeout(function () { loopCheckStatus(response) }, 100)
+					// }
 				})
 			}
 			loopCheckStatus(response)
@@ -287,7 +331,7 @@ class hymnals {
 		    self.default_d = data.default
 		  	files.openFile(function (err, datas) {
 				try{
-			    	if (err) {}
+			    	if (err) {return callback(true)}
 			    	else {
 			    		datas = JSON.parse(datas)	
 			    		for (i in self.hymnals_d) {
@@ -312,11 +356,66 @@ class hymnals {
 			    self.Languages_d = langs
 			  	return callback();
 			}, 'downloaded.json')
-		 })
+		 }).catch(function(){return callback(true)})
+	}
+
+	checklocalDb(callback){
+		let self = this
+		files.openFile(function (err, data) {
+		    if (err) {}
+		    data = JSON.parse(data)
+			let tmp = data
+		    self.hymnals_d = data.hymnals
+		    self.default_d = data.default
+		    let i
+		    files.openFile(function (err, datas) {
+				try{
+			    	if (err) {return callback(true)}
+			    	else {
+			    		datas = JSON.parse(datas)	
+			    		for (i in self.hymnals_d) {
+				    		let hymnal = self.hymnals_d[i]
+				    		let id = hymnal.id
+			      			self.hymnals_d[i].isDownloaded = datas.includes(parseInt(id))
+			      		}
+			    	}			
+				}catch(f){
+					// alert(f)
+				}
+				let languages = []
+			    for (i in self.hymnals_d) {
+			      let hymnal = self.hymnals_d[i]
+			      let lang = hymnal.Language
+			      languages[lang] = lang
+			    }
+			    let langs = []
+			    for (let i in languages) {
+			      langs.push({lang: i, isOpen: false})
+			    }
+			    self.Languages_d = langs
+			  	return callback();
+			}, 'downloaded.json')
+			
+		}, 'index.json')
+	}
+
+	checkHymnalsDb(callback) {
+		let self = this
+		self.checkOnlinedb(function(err){
+			if(err){
+				self.checklocalDb(function(){
+					return callback();
+				})
+			}else
+			return callback();
+		})
+	}
+
+	actuallyUpdateHymnals() {
+		//get list of downloaded hymnals... 
 	}
 
 	updateHymnals(hymnals, callback) {
-		// write to file...
 		let i
 		let self = this
 		let downloadedHymnals = []
@@ -324,21 +423,15 @@ class hymnals {
 			let hymnal = hymnals[i]
 			if(hymnal.isDownloaded === true)downloadedHymnals.push(hymnal.id)
 		}
-		alert(downloadedHymnals)
 		files.writeFile(function(){
-			alert("written....")
-			// download those hymnals...
-			// Update the list....
-			// 
-			return callback()
-			// update lists with hymnals only which have been downloaded
-			// update default hymnal is need be..
+			// Check for hymnals to download or update
+			self.checkHymnalsDb(function(){
+				self.Languages = self.Languages_d
+				self.hymnals = self.hymnals_d
+				self.default = self.default_d
+				return callback()
+			})
 		},JSON.stringify(downloadedHymnals),'downloaded.json')
-		//then write this to downloaded hymnals
-		// then download all those hymnals..
-		
-
-
 	}
 
 }

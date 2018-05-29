@@ -54,7 +54,7 @@ export default {
 
   created () {
     let self = this
-    hymnals.hymnalInst.checkOnlinedb(function(){
+    hymnals.hymnalInst.checkHymnalsDb(function(){
       hymnals.hymnalInst.getHymnals_d(function(langs, hymnals, defaultHymnal){
         self.Languages = langs
         self.hymnals = hymnals
@@ -65,7 +65,10 @@ export default {
     updateHymnals () {
       let self = this
       hymnals.hymnalInst.updateHymnals(self.hymnals, function(){
-        // alert('updated')
+        hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
+          self.Languages = langs
+          self.hymnals = hymnals
+        })
       })
     }
   }
