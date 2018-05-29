@@ -83,6 +83,20 @@ function openFile(callback, whichFile) {
 	}, path)
 }
 
+function createDirectory(callback, dir, indir) {
+	if(indir === undefined)indir='';
+	window.resolveLocalFileSystemURL(cordova.file.dataDirectory+ "www/hymnals-data/"+indir, 
+		function(rootDirEntry) {
+			rootDirEntry.getDirectory(dir, { create: true }, function (dirEntry) {
+		        return callback();
+		    }, function(){
+		    	return callback(true);});
+		}
+		, function(e){
+			callback(true);}
+	);
+}
+
 function writeFile(callback, dataObj, whichFile) {
 	window.resolveLocalFileSystemURL(cordova.file.dataDirectory+ "www/hymnals-data/", 
 		function(dir) {
@@ -94,9 +108,9 @@ function writeFile(callback, dataObj, whichFile) {
 					fileWriter.onwriteend = function() {
 		            	callback(null);
 		        	};
-		        	fileWriter.onerror = function (e) {   };
-				}, function(e){});		
-			});
+		        	fileWriter.onerror = function (e) { callback(true);  };
+				}, function(e){ callback(true);});		
+			}, function(e){ callback(true);});
 		}
 		, function(e){
 			callback(true);}
@@ -106,5 +120,6 @@ function writeFile(callback, dataObj, whichFile) {
 export default {
   checkStatus,
   openFile,
-  writeFile
+  writeFile,
+  createDirectory
 }
