@@ -125,6 +125,7 @@
 <script>
 import hymnals from './services/hymnals/';
 import files from './services/files/'
+import updates from './services/updates/'
 import router from './router/'
 
 export default {
@@ -147,6 +148,23 @@ export default {
   watch: {
     $route (to, from){
       let self = this
+      // check if hymnals have been updated
+      //alert()
+      updates.checkforUpdates()
+      if(updated === true) {
+        updated = false
+        //reload hymnals
+        hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){        
+          self.Languages = langs
+          self.hymnals = hymnals
+          currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+          self.currentHymnalName = currentHymnal.shortname
+          self.currentHymnNumber = currentHymnal.hymnNumber
+          self.canGoNext = currentHymnal.canGoNext
+          self.canGoBack = currentHymnal.canGoBack
+        })
+      }
+
       let currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
       self.currentHymnalName = currentHymnal.shortname
       self.currentHymnNumber = currentHymnal.hymnNumber
@@ -182,7 +200,9 @@ export default {
   created () {
     let self = this
     hymnals.hymnalInst.deviceIsReady(function(ready){
-      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){
+      let hymnalsF = hymnals
+      hymnals.hymnalInst.getHymnals(function(langs, hymnals, defaultHymnal, currentHymnal){        
+        updates.scheduleUpdates(hymnalsF.hymnalInst.getInterval());
         self.Languages = langs
         self.hymnals = hymnals
         currentHymnal = hymnals.hymnalInst.getcurrentHymnal()

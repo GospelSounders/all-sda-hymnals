@@ -12,6 +12,9 @@
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
     }
   },
   "dependent_plugins": {}

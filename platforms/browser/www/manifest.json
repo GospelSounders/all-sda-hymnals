@@ -3,7 +3,7 @@
   "display": "standalone",
   "name": "All SDA Hymnals",
   "short_name": "All SDA Hymnals",
-  "version": "io.cordova.allSDAHymnals",
+  "version": "org.gospelsounders.allSDAHymnals",
   "description": "All Seventh-day Adventist Hymnals in history.",
   "author": "Brian Onang'o",
   "icons": [],

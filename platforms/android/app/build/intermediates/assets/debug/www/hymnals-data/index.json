@@ -7,9 +7,7 @@
     "shortname": "MH1843",
     "path": "MH1843",
     "Language": "ENGLISH",
-    "NumSongs": 123,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 123
   },
   {
     "id": 1,
@@ -18,9 +16,7 @@
     "shortname": "HGPP1849",
     "path": "HGPP1849",
     "Language": "ENGLISH",
-    "NumSongs": 53,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 53
   },
   {
     "id": 2,
@@ -29,9 +25,7 @@
     "shortname": "HSAB1852",
     "path": "HSAB1852",
     "Language": "ENGLISH",
-    "NumSongs": 139,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 139
   },
   {
     "id": 3,
@@ -40,9 +34,7 @@
     "shortname": "HT1869",
     "path": "HT1869",
     "Language": "ENGLISH",
-    "NumSongs": 537,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 537
   },
   {
     "id": 4,
@@ -51,9 +43,7 @@
     "shortname": "HT1886",
     "path": "HT1886",
     "Language": "ENGLISH",
-    "NumSongs": 1413,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 1413
   },
   {
     "id": 5,
@@ -61,9 +51,7 @@
     "shortname": "CS1900",
     "path": "CS1900",
     "Language": "ENGLISH",
-    "NumSongs": 742,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 742
   },
   {
     "id": 6,
@@ -71,9 +59,7 @@
     "shortname": "CH1941",
     "path": "CH1941",
     "Language": "ENGLISH",
-    "NumSongs": 703,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 703
   },
   {
     "id": 7,
@@ -81,9 +67,7 @@
     "shortname": "SDAH",
     "path": "SDAH",
     "Language": "ENGLISH",
-    "NumSongs": 920,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 920
   },
   {
     "id": 8,
@@ -91,9 +75,7 @@
     "shortname": "NZK",
     "path": "NZK",
     "Language": "KISWAHILI",
-    "NumSongs": 220,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 220
   },
   {
     "id": 9,
@@ -101,10 +83,9 @@
     "shortname": "WNY",
     "path": "WNY",
     "Language": "LUO",
-    "NumSongs": 332,
-    "DoneSongs": 1,
-    "Fixed": 0
+    "NumSongs": 332
   }
 ],
-"default":7
+"default":7,
+"Interval":5000
 }

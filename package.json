@@ -13,6 +13,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cordova-android": "^7.0.0",
+    "cordova-browser": "^5.0.3",
+    "cordova-plugin-network-information": "^2.0.1",
+    "eslint-config-airbnb-base": "^12.1.0",
     "font-awesome-icons": "^1.4.3",
     "material-design-icons": "^3.0.1",
     "style-loader": "^0.21.0",
@@ -21,8 +24,7 @@
     "vue": "^2.5.2",
     "vue-awesome": "^3.0.0",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.17",
-    "cordova-browser": "^5.0.1"
+    "vuetify": "^1.0.17"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -84,6 +86,9 @@
     "platforms": [
       "android",
       "browser"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-network-information": {}
+    }
   }
 }

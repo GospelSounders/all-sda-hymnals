@@ -12,6 +12,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.allSDAHymnals"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "io.cordova.allSDAHymnals"
     }
   },
   "dependent_plugins": {}

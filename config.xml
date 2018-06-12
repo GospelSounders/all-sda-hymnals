@@ -26,6 +26,7 @@
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="AndroidExtraFilesystems" value="files,cache, sdcard, cache-external, files-external" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <engine name="android" spec="^7.0.0" />
-    <engine name="browser" spec="^5.0.1" />
+    <engine name="browser" spec="^5.0.3" />
 </widget>

@@ -1,13 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
+ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
 MERGED from [:CordovaLib] /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:20:1-27:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
-INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-15:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
+INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:1-16:12
 	package
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:2:102-144
 		INJECTED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml
@@ -90,3 +90,7 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:14:5-81
 	android:name
 		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:14:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:15:5-79
+	android:name
+		ADDED from /home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/AndroidManifest.xml:15:22-76

@@ -9,6 +9,9 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
     <name>All SDA Hymnals</name>
     <description>
         All Seventh-day Adventist Hymnals in history.
