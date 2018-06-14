@@ -1,21 +1,27 @@
-# all-sda-hymnals
+## Study Hymnal
+Study hymnal is an application powered by cordova that uses the [most comprehensive database of hymns and tunes used by advent believers from 1843 to-date](https://github.com/GospelSounders/hymnals-data).
 
-> All SDA Hymnals
+Its name -`Study Hymnal`- implies that it is designed to be more that just a tool for displaying songs. But just as the Bible is to be studied with the help of marginal references and a concordance, this application is designed to help the seeker after truth to be, like Wycliffe, 'a keen detector of error'. By seeing the changes in the words of the songs (mostly changes toward ecumenism), changes in keys (changes in music), changes in tunes (changes in music), removal of stanzas and addition of other stanzas, we hope this will be a good starting point to help the user of this application to 'seek the old paths' as we continue to add other features. 
 
-## Build Setup
+`Remove not the ancient landmark, which thy fathers have set`
+
+
+## Usage
+
 
 ``` bash
 # install dependencies
+git clone https://github.com/GospelSounders/all-sda-hymnals.git
+cd www/hymnals-data
+git clone https://github.com/GospelSounders/hymnals-data.git .
+cd ../..
+cd all-sda-hymnals
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+cordova run android
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Todo
+
