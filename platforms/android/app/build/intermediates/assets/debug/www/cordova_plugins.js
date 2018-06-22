@@ -189,6 +189,38 @@ module.exports = [
     "clobbers": [
       "Connection"
     ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification_android",
+    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
+    "id": "cordova-plugin-spinner.SpinnerPlugin",
+    "file": "plugins/cordova-plugin-spinner/www/spinner-plugin.js",
+    "pluginId": "cordova-plugin-spinner",
+    "clobbers": [
+      "SpinnerPlugin"
+    ]
+  },
+  {
+    "id": "cordova-plugin-spinner-dialog.SpinnerDialog",
+    "file": "plugins/cordova-plugin-spinner-dialog/www/spinner.js",
+    "pluginId": "cordova-plugin-spinner-dialog",
+    "merges": [
+      "window.plugins.spinnerDialog"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -196,7 +228,10 @@ module.exports.metadata =
 {
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-file": "6.0.1",
-  "cordova-plugin-network-information": "2.0.1"
+  "cordova-plugin-network-information": "2.0.1",
+  "cordova-plugin-dialogs": "2.0.1",
+  "cordova-plugin-spinner": "1.1.0",
+  "cordova-plugin-spinner-dialog": "1.3.1"
 };
 // BOTTOM OF METADATA
 });

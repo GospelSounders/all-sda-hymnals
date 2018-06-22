@@ -4,20 +4,37 @@
             "outputFile": "/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/res/values/strings.xml",
+                    "source": "/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/res/values/spinner_plugin_styles.xml",
                     "from": {
-                        "startLines": "-1,2,-1",
-                        "startColumns": "-1,4,-1",
-                        "startOffsets": "-1,55,-1",
-                        "endColumns": "-1,52,-1",
-                        "endOffsets": "-1,103,-1"
+                        "startLines": "23,11,2",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "1306,589,55",
+                        "endLines": "23,22,10",
+                        "endColumns": "47,12,12",
+                        "endOffsets": "1349,1301,584"
                     },
                     "to": {
-                        "startLines": "2,3,4",
+                        "startLines": "2,6,18",
                         "startColumns": "4,4,4",
-                        "startOffsets": "55,119,172",
+                        "startOffsets": "55,279,996",
+                        "endLines": "2,17,26",
+                        "endColumns": "47,12,12",
+                        "endOffsets": "98,991,1525"
+                    }
+                },
+                {
+                    "source": "/home/brian/Code/gospelsounders/all-sda-hymnals/platforms/android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1",
+                        "startColumns": "-1,-1,-1",
+                        "startOffsets": "-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "3,4,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "103,167,220",
                         "endColumns": "63,52,58",
-                        "endOffsets": "114,167,226"
+                        "endOffsets": "162,215,274"
                     }
                 }
             ]

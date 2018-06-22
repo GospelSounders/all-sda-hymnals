@@ -412,6 +412,7 @@ class hymnals {
 
 	actuallyUpdateHymnals(callback) {
 		let self = this
+		let spinnerOptions = { dimBackground: true };
   		let i, hymnals, hymnals_tmp, localHymnals, onlineHymnals, compareHymnals
   		let gitroot = 'https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/'
   		self.checkOnlinedb(function(err){
@@ -462,6 +463,8 @@ class hymnals {
 		    async function asyncfor(){
 					for (i in localHymnals) {
 						let hymnal = localHymnals[i]
+						let k = parseInt(i)+1;
+						SpinnerPlugin.activityStart(`Updating ${hymnal.shortname} (${k} of ${Object.keys(localHymnals).length})`, spinnerOptions);
 						if(hymnal.isDownloaded === true){
 							let j
 							for(j in onlineHymnals) {
@@ -474,10 +477,11 @@ class hymnals {
 							}
 						}
 					}
+					SpinnerPlugin.activityStop();
 					callback();
 				}
 
-			asyncfor();
+			asyncfor();			
 			})
 		})
 	}

@@ -15,6 +15,15 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "io.cordova.allSDAHymnals"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
+    },
+    "cordova-plugin-spinner": {
+      "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
+    },
+    "cordova-plugin-spinner-dialog": {
+      "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
     }
   },
   "dependent_plugins": {}
