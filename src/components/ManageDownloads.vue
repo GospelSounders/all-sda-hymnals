@@ -44,7 +44,6 @@
 import hymnals from '../services/hymnals/';
 
 export default {
-  name: 'HelloWorld',
   data () {
     return {
       hymnals: [],

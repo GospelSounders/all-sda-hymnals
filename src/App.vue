@@ -40,7 +40,23 @@
           <v-list-tile-action>
             <v-icon>fa-gear</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Downloads</v-list-tile-title>
+          <v-list-tile-title>H-Manager</v-list-tile-title>
+        </v-list-tile>
+        <v-divider></v-divider>
+        <v-list-tile to="/resources">
+          <v-list-tile-action>
+            <!-- <icon name="info"></icon> -->
+            <v-icon>fa-info</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>More Resources</v-list-tile-title>
+        </v-list-tile>
+        <v-divider></v-divider>
+        <v-list-tile to="/buyhymnal">
+          <v-list-tile-action>
+            <!-- <icon name="info"></icon> -->
+            <v-icon>fa-info</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Buy Hymnals</v-list-tile-title>
         </v-list-tile>
         <v-divider></v-divider>
         <v-list-tile to="/About">
@@ -50,6 +66,7 @@
           </v-list-tile-action>
           <v-list-tile-title>About</v-list-tile-title>
         </v-list-tile>
+        
       </v-list>
     </v-navigation-drawer>
     <v-toolbar  dark style=" padding-top: 0px;" app  dense>
@@ -100,7 +117,7 @@
         </v-btn>
       </v-flex>
       <v-flex xs2 >
-        <v-btn icon style="color:purple;">
+        <v-btn icon style="color:purple;" to="/Search">
           <v-icon>fa-search</v-icon>
         </v-btn>
       </v-flex>
@@ -148,8 +165,14 @@ export default {
   watch: {
     $route (to, from){
       let self = this
-      // check if hymnals have been updated
-      //alert()
+      // Order is important here
+      // first
+      let currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
+      self.currentHymnalName = currentHymnal.shortname
+      self.currentHymnNumber = currentHymnal.hymnNumber
+      self.canGoNext = currentHymnal.canGoNext
+      self.canGoBack = currentHymnal.canGoBack
+      // second
       updates.checkforUpdates()
       if(updated === true) {
         updated = false
@@ -165,11 +188,7 @@ export default {
         })
       }
 
-      let currentHymnal = hymnals.hymnalInst.getcurrentHymnal()
-      self.currentHymnalName = currentHymnal.shortname
-      self.currentHymnNumber = currentHymnal.hymnNumber
-      self.canGoNext = currentHymnal.canGoNext
-      self.canGoBack = currentHymnal.canGoBack
+      
     },
     drawer (val){
       let self = this

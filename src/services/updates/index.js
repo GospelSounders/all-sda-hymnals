@@ -5,14 +5,17 @@ function checkforUpdates() {
 	if(updateScheduled === false)return false;	//don't update without a schedule
 	updateinProgress = true;
 
+	// alert("updated scheduled");
 	hymnals.hymnalInst.quickUpdateApp(function(err){ //update also index.json
 		if(!err){
 			updateScheduled = false;	//schedule done
 			updateinProgress = false; //finished
 			updated = true;
+			// alert('updated');
 
 		}else {
-			updateinProgress = false
+			updateinProgress = false;
+			// alert('update failed');
 		}
 	})
 }

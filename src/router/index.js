@@ -6,6 +6,7 @@ import About from '@/components/About';
 import Settings from '@/components/Settings';
 import Hymnal from '@/components/Hymnal';
 import ManageDownloads from '@/components/ManageDownloads';
+import Search from '@/components/Search';
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/ManageDownloads',
       name: 'ManageDownloads',
       component: ManageDownloads,
+    },
+    {
+      path: '/Search',
+      name: 'Search',
+      component: Search,
     }
   ],
 });

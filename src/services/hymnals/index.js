@@ -1,6 +1,7 @@
 import files from '../files/'
 import connection from '../connection/'
 import axios from 'axios'
+import * as JsSearch from 'js-search';
 
 class hymnals {
 
@@ -89,15 +90,59 @@ class hymnals {
 			self.currentHymnal.text = "Hymn still not available"
 		}
 		let path = self.currentHymnal.path
+		// alert("inside path");
 		files.openFile(function (err, data) {
 			try{
 		    if (err) {self.setNavigation(); return callback()}
 		    data = JSON.parse(data)				
 				self.currentHymnal.text = data.songs[self.currentHymnal.hymnNumber] || "Hymn still not available"
 				self.currentHymnal.NumSongs = data.NumSongs
-				self.currentHymnal.otherHymnals = data.songs[self.currentHymnal.hymnNumber].otherHymnals
-				self.setNavigation()
-				return callback();
+
+				files.openFile(function (err, datas) {
+					if(err);
+					try{
+					datas = JSON.parse(datas)	
+
+					let search = new JsSearch.Search(self.currentHymnal.shortname);
+
+					let zTmp = [];
+					for(let i in datas) {
+						let tmp = {};
+						tmp[i] = datas[i]
+						
+						for(let k in tmp[i]){
+							tmp[i][k]= tmp[i][k].toString() 
+						}
+						search.addIndex([i.toString() ,self.currentHymnal.shortname])
+						zTmp.push(tmp);
+						
+					}
+					// alert(JSON.stringify(zTmp))
+					search.addDocuments(zTmp);
+
+					let results = search.search(self.currentHymnal.hymnNumber.toString());    
+					let ret = {}
+					results = results[0] || []
+					// alert(JSON.stringify(results))
+					for(let i in results){
+						// just a single row
+						results = results[i]
+						// alert(JSON.stringify(results))
+						let j = 0;
+						for(let k in results) {
+							ret[j++] = parseInt(results[k])
+						}
+					}
+					// alert(JSON.stringify(ret))
+					self.currentHymnal.otherHymnals = ret;
+					self.setNavigation()
+					return callback();
+					}catch(err){
+						self.setNavigation()
+						return callback();
+					}
+				
+				}, 'allhymns.json')
 			}catch(f){
 				self.setNavigation()
 				return callback()
@@ -136,7 +181,9 @@ class hymnals {
 		// Add hymnNumber
 		try{
 			self.currentHymnal.hymnNumber = prevHymnal.otherHymnals[self.currentHymnal.id] || 0
-		}catch(f){}
+		}catch(f){
+			self.currentHymnal.hymnNumber = 0
+		}
 		self.currentHymnal.hymnNumber = self.currentHymnal.hymnNumber || 0
 		self.currentHymnal.Dialpad = false
 		self.setNavigation()
@@ -144,7 +191,9 @@ class hymnals {
 		self.loadSongWords(function(){
 			return callback(self.currentHymnal)
 		})
-		}catch(e){}
+		}catch(e){
+			alert(e)
+		}
 	}
 
 	typeNumber(typedNumber, callback) { 
@@ -169,7 +218,6 @@ class hymnals {
 					tmp.pop()
 					tmp = tmp.join('')
 					self.typedNumber = tmp
-
 				}
 				return callback(self.currentHymnal)
 			})
@@ -262,11 +310,14 @@ class hymnals {
 			return callback(true)
 		}
 		let self = this
+		// alert('Checking online')
 		axios
 		  .get('https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/index.json')
 		  .then(function(response){
 		  	let data = response.data
 		  	try{
+		  		// alert('loaded...')
+		  		// alert(data)
 		  		data = JSON.parse(data)
 		  	}catch(e){
 		  		data = data
@@ -365,10 +416,12 @@ class hymnals {
   		let gitroot = 'https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/'
   		self.checkOnlinedb(function(err){
 			if(err){
+				// alert(err);
 				return callback(true);
 			}
 			onlineHymnals = self.hymnals_d
-			// alert(JSON.stringify(onlineHymnals))
+			// alert('from online')
+			alert(JSON.stringify(onlineHymnals))
 			self.checklocalDb(function(){
 				localHymnals = self.hymnals_d
 				compareHymnals = []
@@ -376,6 +429,7 @@ class hymnals {
 				let numAlltobeUpdated = 0;
 		    	let counter = 0;
 		    	// let gErr = null
+		    	// alert(JSON.stringify(localHymnals))
 				for (i in localHymnals) {
 		    		let hymnal = localHymnals[i]
 		    		if(hymnal.isDownloaded === true){
@@ -384,6 +438,7 @@ class hymnals {
 
 		    				if(onlineHymnals[j].id === hymnal.id) {  // sync foreach... where to return the callback?
 								if(hymnal.DoneSongs !== onlineHymnals[j].DoneSongs || hymnal.Fixed !== onlineHymnals[j].Fixed) {
+									alert(`updating...${hymnal.path}`)
 		    						numAlltobeUpdated ++;
 		    						let path = hymnal.path
 		    						let localpath = path+'/index.json'
@@ -393,10 +448,11 @@ class hymnals {
 									.get(path)
 									.then(function(response){
 										let data = response.data
+
 										files.createDirectory(function(err){
 
 											if(err){
-												alert(err)
+												// alert(err)
 											}
 											else
 											// update hymnals....
@@ -415,6 +471,9 @@ class hymnals {
 														}
 													}
 													// save to index.json
+													// alert(`saving this....to:${} `)
+													alert(JSON.stringify(data)+'======='+JSON.stringify(saveHymnals)+'...of:'+localpath)
+													// alert(alert())
 													files.writeFile(function(){
 														counter++;
 														// updated = true
@@ -461,6 +520,7 @@ class hymnals {
 				self.hymnals = self.hymnals_d
 				self.default = self.default_d
 				self.actuallyUpdateHymnals(function(){
+					alert('going to updateHymnals')
 					return callback()
 				})
 			})
@@ -475,9 +535,26 @@ class hymnals {
 		.then(function(response){
 			let data = response.data
 			files.writeFile(function(){
-				self.actuallyUpdateHymnals(callback);
+				// alert('wrote files..')
+
+
+				path = 'https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/allhymns.json'
+				axios
+				.get(path)
+				.then(function(response){
+					let data = response.data
+					files.writeFile(function(){
+						self.actuallyUpdateHymnals(callback);
+					},JSON.stringify(data),'allhymns.json')
+				}).catch(function(){
+					return callback(true)
+				})
+				// self.actuallyUpdateHymnals(callback);
 			},JSON.stringify(data),'index.json')
-		}).catch(function(){return callback(true)})
+		}).catch(function(){
+			// alert('some problem')
+			return callback(true)
+		})
 	}
 }
 
