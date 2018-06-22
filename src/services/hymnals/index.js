@@ -416,91 +416,68 @@ class hymnals {
   		let gitroot = 'https://raw.githubusercontent.com/GospelSounders/hymnals-data/master/'
   		self.checkOnlinedb(function(err){
 			if(err){
-				// alert(err);
 				return callback(true);
 			}
 			onlineHymnals = self.hymnals_d
-			// alert('from online')
-			alert(JSON.stringify(onlineHymnals))
 			self.checklocalDb(function(){
 				localHymnals = self.hymnals_d
 				compareHymnals = []
 
-				let numAlltobeUpdated = 0;
-		    	let counter = 0;
-		    	// let gErr = null
-		    	// alert(JSON.stringify(localHymnals))
-				for (i in localHymnals) {
-		    		let hymnal = localHymnals[i]
-		    		if(hymnal.isDownloaded === true){
-		    			let j
-		    			for(j in onlineHymnals) {
+		    async function longfunc(hymnal) {
+		    	let path = hymnal.path
+					let localpath = path+'/index.json'
+					path = gitroot+localpath
+		    	await axios
+					.get(path)
+					.then(function(response){
+						let data = response.data
+						files.createDirectory(function(err){
+							if(err){
+							}
+							else
+							files.writeFile(function(){
+								// update also index.json
+								files.openFile(function (err, datas) {
+									datas = JSON.parse(datas)
+									let k
+									let saveHymnals = datas.hymnals
+									for(k in saveHymnals){
+										if(saveHymnals[k].id === hymnal.id){
+											saveHymnals[k].DoneSongs = onlineHymnals[j].DoneSongs
+											saveHymnals[k].Fixed = onlineHymnals[j].Fixed
+										}
+									}
+									files.writeFile(function(){
+										return true
+									},JSON.stringify(saveHymnals),'index.json')
+									
+								}, 'index.json')
+							},JSON.stringify(data),localpath)
+						},hymnal.path)
+					}).catch(function(err){ 
+						return err
+					})
+		    }
 
-		    				if(onlineHymnals[j].id === hymnal.id) {  // sync foreach... where to return the callback?
+		    async function asyncfor(){
+					for (i in localHymnals) {
+						let hymnal = localHymnals[i]
+						if(hymnal.isDownloaded === true){
+							let j
+							for(j in onlineHymnals) {
+
+								if(onlineHymnals[j].id === hymnal.id) {  
 								if(hymnal.DoneSongs !== onlineHymnals[j].DoneSongs || hymnal.Fixed !== onlineHymnals[j].Fixed) {
-									alert(`updating...${hymnal.path}`)
-		    						numAlltobeUpdated ++;
-		    						let path = hymnal.path
-		    						let localpath = path+'/index.json'
-		    						path = gitroot+localpath
-		    						// alert(path)
-		    						axios
-									.get(path)
-									.then(function(response){
-										let data = response.data
+										let tmp = await longfunc(hymnal)
+									}
+								}
+							}
+						}
+					}
+					callback();
+				}
 
-										files.createDirectory(function(err){
-
-											if(err){
-												// alert(err)
-											}
-											else
-											// update hymnals....
-											files.writeFile(function(){
-												// update also index.json
-												files.openFile(function (err, datas) {
-
-													datas = JSON.parse(datas)
-													let k
-													let saveHymnals = datas.hymnals
-													for(k in saveHymnals){
-														if(saveHymnals[k].id === hymnal.id){
-															saveHymnals[k].DoneSongs = onlineHymnals[j].DoneSongs
-															saveHymnals[k].Fixed = onlineHymnals[j].Fixed
-
-														}
-													}
-													// save to index.json
-													// alert(`saving this....to:${} `)
-													alert(JSON.stringify(data)+'======='+JSON.stringify(saveHymnals)+'...of:'+localpath)
-													// alert(alert())
-													files.writeFile(function(){
-														counter++;
-														// updated = true
-													},JSON.stringify(saveHymnals),'index.json')
-													
-												}, 'index.json')
-											},JSON.stringify(data),localpath)
-										},hymnal.path)
-									}).catch(function(err){ return callback(true)})
-		    					}
-		    					break
-		    				}
-		    			}
-		    		}
-		  		}
-
-		  		function waitforall() {
-		  			// alert(counter)
-		  			if(counter === numAlltobeUpdated){
-
-		  				return callback()
-		  			}
-		  			else {
-		  				setTimeout(function () { waitforall() }, 100)
-		  			}
-		  		}
-		  		waitforall()
+			asyncfor();
 			})
 		})
 	}
@@ -520,7 +497,6 @@ class hymnals {
 				self.hymnals = self.hymnals_d
 				self.default = self.default_d
 				self.actuallyUpdateHymnals(function(){
-					alert('going to updateHymnals')
 					return callback()
 				})
 			})
