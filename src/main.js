@@ -6,12 +6,15 @@ import 'vuetify/dist/vuetify.min.css'; // Ensure you are using css-loader
 import App from './App';
 import router from './router';
 
+
 // icons
 import 'vue-awesome/icons/home'
 import 'vue-awesome/icons/book'
 import 'vue-awesome/icons/info'
 import 'vue-awesome/icons/align-justify'
 import 'vue-awesome/icons/caret-square-down'
+
+import VueTouch from 'vue-touch';
 
 import Icon from 'vue-awesome/components/Icon'
 
@@ -20,6 +23,7 @@ Vue.component('icon', Icon)
 // import cordova from 'cordova';
 
 Vue.use(Vuetify);
+Vue.use(VueTouch);
 
 Vue.config.productionTip = false;
 

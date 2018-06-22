@@ -1,5 +1,5 @@
 <template>
-  <v-app style="margin-top: 0px;">
+  <v-app style="margin-top: 0px;" v-on:dblclick.native ="doubleTap()">
     <v-navigation-drawer v-model="drawer" temporary fixed  dark class="indigo" style="margin-top: 48px;" height="100%">
       <v-list>
         <v-list-tile>
@@ -86,14 +86,14 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-btn icon @click.native.stop="prevHymn()" style="color:green;" v-model="canGoBack" :disabled="!canGoBack">
+      <v-btn icon @click.native.stop="prevHymn()" style="color:green;" v-model="canGoBack" :disabled="!canGoBack" id="prevhymn">
         <v-icon>fa-arrow-circle-left</v-icon>
       </v-btn>
       <v-btn icon  to="/HymnNumbers" style="color:purple;">
         <v-subheader style="color:#fff; font-weight: bold; font-size: 1.0em;">{{currentHymnNumber}} </v-subheader>
       </v-btn>
-      <v-btn icon @click.native.stop="nextHymn()" style="color:green;" v-model="canGoNext" :disabled="!canGoNext">
-        <v-icon>fa-arrow-circle-right</v-icon>
+      <v-btn icon @click.native.stop="nextHymn()" style="color:green;" v-model="canGoNext" :disabled="!canGoNext" id="nexthymn">
+        <v-icon>fa-arrow-circle-right</v-icon> 
       </v-btn>
       <v-btn icon>
         <v-icon>more_vert</v-icon>
@@ -158,8 +158,8 @@ export default {
       currentHymnalName: '',
       currentHymnNumber: '',
       canGoNext: false,
-      canGoBack: false
-
+      canGoBack: false,
+      fullscreen:false
     }
   },
   watch: {
@@ -274,6 +274,12 @@ export default {
         else router.push('/HymnNumbers')
       })
 
+    },
+    doubleTap(){
+      this.fullscreen ^= true
+      if(this.fullscreen)
+        StatusBar.hide()
+      else StatusBar.show()
     }
   }
 }

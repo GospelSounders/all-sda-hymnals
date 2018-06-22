@@ -24,6 +24,9 @@
     },
     "cordova-plugin-spinner-dialog": {
       "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "org.gospelsounders.allSDAHymnals"
     }
   },
   "dependent_plugins": {}

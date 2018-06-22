@@ -21,6 +21,10 @@
     <feature name="SpinnerDialog">
         <param name="android-package" value="hu.dpal.phonegap.plugins.SpinnerDialog" />
     </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <name>All SDA Hymnals</name>
     <description>
         All Seventh-day Adventist Hymnals in history.
